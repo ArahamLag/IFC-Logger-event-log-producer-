@@ -1,0 +1,77 @@
+<Workspace Version="1.3.2.2480" X="119.880920858347" Y="280.130442760809" zoom="0.495889394423787" ScaleFactor="1" Name="String.FindRegularExpression" Description="Returns all occurences of a regular expression within a string (or list of strings). The syntax for regular expressions is explained at&#xD;&#xA;http://ironpython-test.readthedocs.org/en/latest/howto/regex.html" ID="42131bad-7027-4d71-b6f3-bdb8ad2c7dbd" Category="Clockwork.Core.String.Actions">
+  <NamespaceResolutionMap />
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="530bb7cb-3104-4bfe-b27c-d9235d17535d" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="80.7344857460414" y="-216.902385552143" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="RegEx : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="601f6589-cfcc-41d1-8a9f-288c81465dcf" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-241.607017929883" y="9.26480127990327" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="str : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="79e28ed5-10cb-448b-9bd5-e1c700e5870e" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="998.571362852341" y="10.0894855575637" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="seq" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <PythonNodeModels.PythonNode guid="d6455be2-8efe-4008-afe7-57ebf981e42f" type="PythonNodeModels.PythonNode" nickname="Python Script" x="463.127650675135" y="-26.6066410162159" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+import re
+
+regexstring = IN[0]
+regexlist = IN[1]
+elementlist = list()
+thisexp = re.compile(regexstring)
+for item in regexlist:
+	try:
+		elementlist.append(thisexp.findall(item))
+	except:
+		elementlist.append(list())
+OUT = elementlist</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Watch guid="c8c6ac23-c2b4-44f2-86e6-721ee2a33889" type="CoreNodeModels.Watch" nickname="Watch" x="681.200704798247" y="50.6439619301711" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <CoreNodeModels.Watch guid="ee57a441-961d-4c6e-932a-293ffc863404" type="CoreNodeModels.Watch" nickname="Watch" x="457.172705353996" y="294.474929998022" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <CoreNodeModels.Watch guid="b0eaca48-7ee0-42d7-ac54-ba3aeeaa528f" type="CoreNodeModels.Watch" nickname="Watch" x="125.668501440165" y="88.2387687993427" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="82841c3b-2a34-42b3-949d-3b3f274ad48f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Flatten" x="203.8422749449" y="218.536976472142" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Flatten@var[]..[]">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <CoreNodeModels.CreateList guid="88efd1ad-e648-4454-92c1-246f7868ef57" type="CoreNodeModels.CreateList" nickname="List.Create" x="-16.1577250550997" y="218.536976472142" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.CreateList>
+    <PythonNodeModels.PythonNode guid="1976ed1f-1178-4427-85dd-f5106839bb6b" type="PythonNodeModels.PythonNode" nickname="Python Script" x="573.14748033358" y="-263.150461551341" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>check = IN[0]
+items = IN[1]
+if isinstance(check, (list)): OUT = items
+else: OUT = items[0]</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Watch guid="b0263ad4-21f9-4776-bceb-92805483457d" type="CoreNodeModels.Watch" nickname="Watch" x="676.51023947389" y="-417.684467233253" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="530bb7cb-3104-4bfe-b27c-d9235d17535d" start_index="0" end="d6455be2-8efe-4008-afe7-57ebf981e42f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="601f6589-cfcc-41d1-8a9f-288c81465dcf" start_index="0" end="88efd1ad-e648-4454-92c1-246f7868ef57" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="601f6589-cfcc-41d1-8a9f-288c81465dcf" start_index="0" end="1976ed1f-1178-4427-85dd-f5106839bb6b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d6455be2-8efe-4008-afe7-57ebf981e42f" start_index="0" end="c8c6ac23-c2b4-44f2-86e6-721ee2a33889" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d6455be2-8efe-4008-afe7-57ebf981e42f" start_index="0" end="1976ed1f-1178-4427-85dd-f5106839bb6b" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="82841c3b-2a34-42b3-949d-3b3f274ad48f" start_index="0" end="ee57a441-961d-4c6e-932a-293ffc863404" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="82841c3b-2a34-42b3-949d-3b3f274ad48f" start_index="0" end="d6455be2-8efe-4008-afe7-57ebf981e42f" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="88efd1ad-e648-4454-92c1-246f7868ef57" start_index="0" end="b0eaca48-7ee0-42d7-ac54-ba3aeeaa528f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="88efd1ad-e648-4454-92c1-246f7868ef57" start_index="0" end="82841c3b-2a34-42b3-949d-3b3f274ad48f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1976ed1f-1178-4427-85dd-f5106839bb6b" start_index="0" end="b0263ad4-21f9-4776-bceb-92805483457d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1976ed1f-1178-4427-85dd-f5106839bb6b" start_index="0" end="79e28ed5-10cb-448b-9bd5-e1c700e5870e" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
